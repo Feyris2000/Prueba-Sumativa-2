@@ -1,0 +1,13 @@
+Declaración de uso de Inteligencia Artificial
+
+Para el desarrollo de esta actividad utilicé inteligencia artificial como una herramienta de apoyo durante el proceso de elaboración de la página web. Su uso estuvo orientado principalmente a organizar las ideas iniciales, estructurar de mejor manera los archivos del proyecto y revisar que la solución cumpliera con los requerimientos solicitados en la rúbrica.
+
+El proyecto desarrollado corresponde a una página web llamada NotaFlex, cuyo objetivo es permitir el registro de calificaciones dentro de la escala chilena. La aplicación considera el ingreso de datos como asignatura, nombre de la evaluación, tipo de evaluación, nota obtenida, ponderación, fecha de realización del examen y fecha de publicación de la nota. Además, permite visualizar los registros en una tabla y calcular automáticamente el promedio final ponderado de la asignatura.
+
+La inteligencia artificial fue utilizada como apoyo para definir una estructura ordenada en tres archivos principales: index.html, estilos.css y script.js. En el archivo HTML se trabajó la organización general de la página y sus secciones; en el archivo CSS se apoyó el diseño visual, los colores, la presentación de los formularios, la tabla y la opción de cambiar entre modo claro y oscuro; mientras que en JavaScript se revisó la lógica de validación de datos, el registro de calificaciones, el cálculo del promedio final y la actualización dinámica de la tabla.
+
+También se utilizó IA para mejorar aspectos visuales de la página, como el nombre del sistema, la tipografía del título, los íconos de las secciones, el fondo de la página y la legibilidad del contenido en modo oscuro. Estos elementos fueron incorporados con el objetivo de entregar una interfaz más atractiva, clara y fácil de usar para el usuario.
+
+Sin embargo, el uso de inteligencia artificial no reemplazó el trabajo personal de revisión y adaptación. La propuesta fue revisada para asegurar que tuviera relación con el objetivo de la actividad, que utilizara una escala de notas chilena de 1.0 a 7.0, que incluyera validaciones adecuadas y que permitiera registrar información de forma coherente. También se verificó que la página funcionara correctamente al ingresar datos, limpiar el formulario, filtrar registros, eliminar calificaciones y calcular el promedio final.
+
+En conclusión, la inteligencia artificial fue utilizada como una herramienta complementaria para apoyar el desarrollo técnico y visual del proyecto. El resultado final fue revisado, ajustado y comprendido antes de su entrega, manteniendo la responsabilidad sobre el contenido, funcionamiento y presentación de la página web.
