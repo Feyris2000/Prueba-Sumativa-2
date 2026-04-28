@@ -1,0 +1,2 @@
+Se cambio la fuente de color a los cuadros superiores de la tabla que corresponde a la sección "Calificaciones registradas" al seleccionar el "modo oscuro".
+Con esta decisión, lograra al usuarios leer con mayor claridad el texto para comprender la estructura de la tabla sin dificultar la comprensión del usuario.
