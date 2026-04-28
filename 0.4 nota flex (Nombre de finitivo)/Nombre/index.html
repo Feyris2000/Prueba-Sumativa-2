@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NotaFlex - Registro de calificaciones en escala chilena</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__content">
+      <div class="topbar">
+        <span class="badge">Evaluación Sumativa 2</span>
+        <button type="button" id="btnTema" class="theme-toggle" aria-label="Cambiar a tema oscuro" aria-pressed="false">
+          <span class="theme-toggle__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img">
+              <path d="M21 13.2A8.6 8.6 0 0 1 10.8 3a7.4 7.4 0 1 0 10.2 10.2Z"></path>
+            </svg>
+          </span>
+          <span id="textoTema">Modo oscuro</span>
+        </button>
+      </div>
+      <h1>NotaFlex</h1>
+      <p class="hero__subtitle">Registro de calificaciones exclusivo para escala chilena</p>
+      <p>
+        Aplicación web para registrar notas dentro de la escala chilena, controlar fechas de examen y publicación,
+        organizar evaluaciones en una tabla dinámica y calcular el promedio final ponderado de la asignatura.
+      </p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card form-card" aria-labelledby="tituloFormulario">
+      <div class="section-title">
+        <span class="icon icon-form" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img">
+            <path d="M8 3h8a2 2 0 0 1 2 2v1h1.2A1.8 1.8 0 0 1 21 7.8v12.4a1.8 1.8 0 0 1-1.8 1.8H4.8A1.8 1.8 0 0 1 3 20.2V7.8A1.8 1.8 0 0 1 4.8 6H6V5a2 2 0 0 1 2-2Z" class="svg-soft"></path>
+            <path d="M8 6h8V5H8v1Zm-1 5h6m-6 4h4" class="svg-line"></path>
+            <path d="m13.5 17.7.5-2.6 4.7-4.7a1.4 1.4 0 0 1 2 2L16 17.1l-2.5.6Z" class="svg-accent"></path>
+          </svg>
+        </span>
+        <div>
+          <h2 id="tituloFormulario">Formulario de registro</h2>
+          <p>Completa todos los campos. Las validaciones se realizan antes de guardar.</p>
+        </div>
+      </div>
+
+      <form id="formCalificacion" novalidate>
+        <div class="grid-form">
+          <div class="campo">
+            <label for="asignatura">Asignatura</label>
+            <input type="text" id="asignatura" placeholder="Ej: JavaScript Avanzado" maxlength="60" autocomplete="off">
+            <span class="error-msg" id="errorAsignatura"></span>
+          </div>
+
+          <div class="campo">
+            <label for="evaluacion">Nombre de la evaluación</label>
+            <input type="text" id="evaluacion" placeholder="Ej: Prueba 1, Examen, Trabajo" maxlength="60" autocomplete="off">
+            <span class="error-msg" id="errorEvaluacion"></span>
+          </div>
+
+          <div class="campo">
+            <label for="tipoEvaluacion">Tipo de evaluación</label>
+            <select id="tipoEvaluacion">
+              <option value="">Selecciona una opción</option>
+              <option value="Prueba">Prueba</option>
+              <option value="Trabajo">Trabajo</option>
+              <option value="Examen">Examen</option>
+              <option value="Proyecto">Proyecto</option>
+              <option value="Participación">Participación</option>
+            </select>
+            <span class="error-msg" id="errorTipo"></span>
+          </div>
+
+          <div class="campo">
+            <label for="nota">Nota obtenida</label>
+            <input type="number" id="nota" placeholder="Ej: 5.8" min="1" max="7" step="0.1">
+            <span class="error-msg" id="errorNota"></span>
+          </div>
+
+          <div class="campo">
+            <label for="ponderacion">Ponderación (%)</label>
+            <input type="number" id="ponderacion" placeholder="Ej: 30" min="1" max="100" step="1">
+            <span class="error-msg" id="errorPonderacion"></span>
+          </div>
+
+          <div class="campo">
+            <label for="fechaExamen">Fecha de realización del examen</label>
+            <input type="date" id="fechaExamen">
+            <span class="error-msg" id="errorFechaExamen"></span>
+          </div>
+
+          <div class="campo">
+            <label for="fechaPublicacion">Fecha de publicación de la nota</label>
+            <input type="date" id="fechaPublicacion">
+            <span class="error-msg" id="errorFechaPublicacion"></span>
+          </div>
+        </div>
+
+        <div class="acciones">
+          <button type="submit" class="btn btn-primary">Guardar calificación</button>
+          <button type="button" id="btnLimpiar" class="btn btn-secondary">Limpiar formulario</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="dashboard" aria-label="Resumen académico">
+      <article class="summary-card">
+        <span>Promedio final ponderado</span>
+        <strong id="promedioFinal">0.0</strong>
+        <small id="estadoPromedio">Sin registros</small>
+      </article>
+
+      <article class="summary-card">
+        <span>Ponderación registrada</span>
+        <strong id="ponderacionTotal">0%</strong>
+        <small id="estadoPonderacion">Falta completar el 100%</small>
+      </article>
+
+      <article class="summary-card">
+        <span>Total de evaluaciones</span>
+        <strong id="totalEvaluaciones">0</strong>
+        <small>Registros almacenados</small>
+      </article>
+    </section>
+
+    <section class="card tools-card" aria-labelledby="tituloHerramientas">
+      <div class="section-title compact">
+        <span class="icon icon-search" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img">
+            <circle cx="10.6" cy="10.6" r="6.2" class="svg-soft"></circle>
+            <path d="m15.2 15.2 4.3 4.3" class="svg-line"></path>
+            <path d="M7.7 10.4a3.2 3.2 0 0 1 3.2-3.2" class="svg-accent-line"></path>
+          </svg>
+        </span>
+        <div>
+          <h2 id="tituloHerramientas">Búsqueda y filtros</h2>
+          <p>Filtra la información registrada sin modificar los datos originales.</p>
+        </div>
+      </div>
+
+      <div class="tools-grid">
+        <div class="campo">
+          <label for="busqueda">Buscar por asignatura o evaluación</label>
+          <input type="search" id="busqueda" placeholder="Ej: examen, matemática, prueba 1">
+        </div>
+        <div class="campo">
+          <label for="filtroTipo">Filtrar por tipo</label>
+          <select id="filtroTipo">
+            <option value="Todos">Todos</option>
+            <option value="Prueba">Prueba</option>
+            <option value="Trabajo">Trabajo</option>
+            <option value="Examen">Examen</option>
+            <option value="Proyecto">Proyecto</option>
+            <option value="Participación">Participación</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="card table-card" aria-labelledby="tituloTabla">
+      <div class="section-title compact">
+        <span class="icon icon-chart" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img">
+            <path d="M4.8 20.5h14.4" class="svg-line"></path>
+            <rect x="5.8" y="11" width="3.1" height="7" rx="1" class="svg-bar-one"></rect>
+            <rect x="10.4" y="6.5" width="3.1" height="11.5" rx="1" class="svg-bar-two"></rect>
+            <rect x="15" y="9" width="3.1" height="9" rx="1" class="svg-bar-three"></rect>
+          </svg>
+        </span>
+        <div>
+          <h2 id="tituloTabla">Calificaciones registradas</h2>
+          <p>La tabla se actualiza dinámicamente al agregar, filtrar o eliminar registros.</p>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Asignatura</th>
+              <th>Evaluación</th>
+              <th>Tipo</th>
+              <th>Nota</th>
+              <th>Ponderación</th>
+              <th>Fecha examen</th>
+              <th>Fecha publicación</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="tablaCalificaciones">
+            <tr>
+              <td colspan="8" class="empty">No existen calificaciones registradas.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card info-card">
+      <h2>Reglas de validación aplicadas</h2>
+      <ul>
+        <li>La nota debe estar entre 1.0 y 7.0, respetando la escala chilena.</li>
+        <li>La ponderación total de la asignatura no puede superar el 100%.</li>
+        <li>La fecha de publicación de la nota no puede ser anterior a la fecha del examen.</li>
+        <li>Los campos de texto aceptan letras, números, espacios y caracteres académicos básicos.</li>
+        <li>La aplicación evita el uso de <strong>innerHTML</strong> para datos dinámicos y utiliza <strong>textContent</strong> / <strong>createElement</strong>.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p><strong>NotaFlex</strong> · Proyecto desarrollado con HTML, CSS y JavaScript para gestionar calificaciones en escala chilena.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
