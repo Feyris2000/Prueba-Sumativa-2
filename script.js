@@ -12,6 +12,7 @@
 */
 
 const STORAGE_KEY = 'calificacionesEscalaChilena';
+const THEME_KEY = 'temaRegistroCalificaciones';
 let calificaciones = obtenerCalificacionesGuardadas();
 
 const formulario = document.getElementById('formCalificacion');
@@ -19,6 +20,8 @@ const btnLimpiar = document.getElementById('btnLimpiar');
 const tablaCalificaciones = document.getElementById('tablaCalificaciones');
 const busqueda = document.getElementById('busqueda');
 const filtroTipo = document.getElementById('filtroTipo');
+const btnTema = document.getElementById('btnTema');
+const textoTema = document.getElementById('textoTema');
 
 const campos = {
   asignatura: document.getElementById('asignatura'),
@@ -45,6 +48,7 @@ formulario.addEventListener('submit', procesarFormulario);
 btnLimpiar.addEventListener('click', limpiarFormulario);
 busqueda.addEventListener('input', renderizarLista);
 filtroTipo.addEventListener('change', renderizarLista);
+btnTema.addEventListener('click', alternarTema);
 
 Object.values(campos).forEach((campo) => {
   campo.addEventListener('input', () => validarFormulario(false));
@@ -52,8 +56,30 @@ Object.values(campos).forEach((campo) => {
 });
 
 function iniciarAplicacion() {
+  cargarTemaGuardado();
   renderizarLista();
   actualizarResumen();
+}
+
+
+function cargarTemaGuardado() {
+  const temaGuardado = localStorage.getItem(THEME_KEY) || 'claro';
+  aplicarTema(temaGuardado);
+}
+
+function alternarTema() {
+  const temaActual = document.body.dataset.theme === 'oscuro' ? 'oscuro' : 'claro';
+  const nuevoTema = temaActual === 'oscuro' ? 'claro' : 'oscuro';
+  aplicarTema(nuevoTema);
+  localStorage.setItem(THEME_KEY, nuevoTema);
+}
+
+function aplicarTema(tema) {
+  const esOscuro = tema === 'oscuro';
+  document.body.dataset.theme = esOscuro ? 'oscuro' : 'claro';
+  textoTema.textContent = esOscuro ? 'Modo claro' : 'Modo oscuro';
+  btnTema.setAttribute('aria-pressed', String(esOscuro));
+  btnTema.setAttribute('aria-label', esOscuro ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');
 }
 
 function procesarFormulario(evento) {
