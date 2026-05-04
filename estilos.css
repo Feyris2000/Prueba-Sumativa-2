@@ -614,3 +614,16 @@ body[data-theme="oscuro"] .table-card .empty {
   color: #dbeafe;
   font-weight: 700;
 }
+
+/* Aclaración visual del nombre de la página */
+.hero__subtitle {
+  margin: -0.4rem 0 1rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+}
+
+body.dark .hero__subtitle {
+  color: #9ee7ff;
+}
